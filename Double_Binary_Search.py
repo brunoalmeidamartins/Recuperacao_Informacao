@@ -1,13 +1,11 @@
-import time
 '''
 Verifica se um conjunto possui mais elementos que o outro subset(D) > subset(Q)
 '''
 def ComparaConjuntos(D,Q,inicioD, fimD, inicioQ, fimQ):
-    print("Tamanho Vetor D:",len(D)," e Tamanho Vetor Q:",len(Q))
-    #print("Indices: ", inicioD, fimD, inicioQ, fimQ)
     result = True
     vet_aux1 = []
     vet_aux2 = []
+    #Inverte os indices caso os valores sejam negativos
     if inicioD > fimD:
         aux = inicioD
         inicioD = fimD
@@ -53,15 +51,19 @@ def Intersect(D, Q, minD, maxD, minQ, maxQ, result):
     if len(Q) == 0 or len(D) == 0: #Se alguma das listas for vazia, entao termina recursao e retorna o vetor vazio!!
         return []
     #Condicacao de parada da recursao
+    print("")
+    print("Condicao de parada:", minD," > ", maxD, " or", minQ, " > ", maxQ)
     if minD > maxD or minQ > maxQ:
         print("Para recursao")
         return
-    midQ = (minQ+maxQ) // 2 #Pega a posicao do elemento do meio
+    midQ = (minQ+maxQ) // 2 #Pega a posicao do elemento do meio do vetor Q
     midQval = Q[midQ] #Pega o valor do elemento do meio
     busca_binaria = BinSearch(midQval, D, minD, maxD) # Faz a busca binaria do elemento de Q no vetor D
     midD = busca_binaria[0] #Recebe a posicao do valor no Vetor D ou a proxima posicao se o elemento nao for encontrado
-
-
+    print("Valores:")
+    print("midQ = ", midQ)
+    print("midQval = ", midQval)
+    print("midD = ", midD)
     '''
     Primeiro IF verifica se o subconjunto (D) > subconjunto (Q)
     Essa comparacacao eh feita pegando o maior elemento do subconjunto (D) e comparando com o maior elemento do subconjunto (Q)
@@ -70,13 +72,15 @@ def Intersect(D, Q, minD, maxD, minQ, maxQ, result):
     print("")
     result_comparacao = ComparaConjuntos(D,Q,minD, midD-1, minQ, midQ-1)
     #result_comparacao = ComparaConjuntos(D,Q,minD, midD, minQ, midQ)
-    print('1 - %s > %s' % (str(result_comparacao[1]),str(result_comparacao[2])))
+    print('1. Compara os tamanhos dos conjuntos:  %d > %d' % (len(result_comparacao[1]),len(result_comparacao[2])))
     if result_comparacao[0]:
-        print('1.1 - D, Q, %d, %d, %d, %d' %( minD,midD - 1, minQ, midQ - 1))
+        print("Mantem a busca na lista D!")
+        print('1.1 - Intersect(D, Q, %d, %d, %d, %d)' %( minD,midD - 1, minQ, midQ - 1))
         Intersect(D, Q, minD,midD - 1, minQ, midQ - 1, result)
         print("")
     else:
-        print('1.2 - Q, D, %d, %d, %d, %d' % (minQ, midQ - 1, minD, midD - 1))
+        print("Inverte a busca! Busca na lista Q!")
+        print('1.2 - Intersect(Q, D, %d, %d, %d, %d)' % (minQ, midQ - 1, minD, midD - 1))
         Intersect(Q, D, minQ, midQ - 1, minD, midD - 1, result)
         print("")
 
@@ -85,9 +89,10 @@ def Intersect(D, Q, minD, maxD, minQ, maxQ, result):
     Se sim, entao adiciona o valor a resposta, pois corresponde a uma interseccao 
     '''
     print("")
+    print("Valor de midD: ", midD)
     print('2 - D[midD]:%d == midQval:%d ' % (D[midD], midQval))
     if D[midD] == midQval:
-        print("2.1 - Adicionando o resultado no vetor")
+        print("2.1 - Adicionando o resultado no vetor result")
         result.append(midQval)
         midD = midD - 1
         print("")
@@ -100,14 +105,15 @@ def Intersect(D, Q, minD, maxD, minQ, maxQ, result):
     print("")
     result_comparacao = ComparaConjuntos(D, Q, midD+1,maxD,midQ+1,maxQ)
     #result_comparacao = ComparaConjuntos(D, Q, midD,maxD,midQ,maxQ)
-    print('3 - %s > %s' % (str(result_comparacao[1]), str(result_comparacao[2])))
+    print('3. Compara os tamanhos dos conjuntos: %d > %d' % (len(result_comparacao[1]), len(result_comparacao[2])))
     if result_comparacao[0]:
-    #if D[maxD] > Q[maxQ]:
-        print('3.1 - D, Q, %d, %d, %d, %d' % (midD, maxD, midQ + 1, maxQ))
+        print("Mantem a busca na lista D!")
+        print('3.1 - Intersect(D, Q, %d, %d, %d, %d)' % (midD, maxD, midQ + 1, maxQ))
         Intersect(D, Q, midD, maxD, midQ + 1, maxQ, result)
         print("")
     else:
-        print('3.2 - Q, D, %d, %d, %d, %d' % (midQ + 1, maxQ, midD, maxD))
+        print("Inverte a busca! Busca na lista Q!")
+        print('3.2 - Intersect(Q, D, %d, %d, %d, %d)' % (midQ + 1, maxQ, midD, maxD))
         Intersect(Q, D, midQ + 1, maxQ, midD, maxD, result)
         print("")
 
@@ -117,34 +123,29 @@ def Intersect(D, Q, minD, maxD, minQ, maxQ, result):
 
 #Testes
 
-'''
-#vetor = list(range(0,10))
-vetor = [10, 11, 12, 13, 14, 15, 17, 18, 19]
-print(vetor)
-chave = 16
-posicao = BinSearch(chave, vetor, 0, len(vetor) - 1)
-
-print(posicao)
-#if posicao[1] >=0:
-#    print("O elemento foi encontrado. Indice: ", posicao[1])
-#else:
-#    print("Elemento nao encontrado: ", posicao[0]) #Maior elemento depois da busca
-'''
-
+#D = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 23, 30, 40, 50, 60, 70, 80, 90, 100]
+#Q = [2,10, 17, 30, 70, 90, 100, 101, 102,103,107,110,230,235,1000]
 
 #D = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 23, 30, 40, 50, 60, 70, 80, 90, 100]
-#D = [2,10, 17, 30, 70, 90, 100, 101, 102,103,107,110,230,235,1000]
 #Q = [1,2,3,4,5,10]
-#Q = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 23, 30, 40, 50, 60, 70, 80, 90, 100]
+
 #D = [2, 4, 6, 8, 10]
 #Q = [1, 2, 3, 4]
+
 #D = [0, 1, 2, 3, 4, 5]
 #Q = [0, 3, 5, 6, 7, 8]
-#D = [0, 1, 2, 3]
-#Q = [0,3]
-D = list(range(0,2000))
-Q = [0, 100, 101, 234, 2001]
+
+D = [1, 2, 3, 4, 5]
+Q = [1, 4, 5]
+
+#D = list(range(0,2000))
+#Q = [0, 100, 101, 234, 2001]
+
+#D = list(range(0,1000000))
+#Q = list(range(10,1000))
+
 result = []
+print("\nIntersect(D, Q, 0, %d, 0, %d, result)" %(len(D)-1, len(Q)-1))
 result_intersect = (Intersect(D, Q, 0, len(D)-1, 0, len(Q)-1, result))
 
 print("")
