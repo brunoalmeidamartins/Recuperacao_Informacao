@@ -135,14 +135,14 @@ def Intersect(D, Q, minD, maxD, minQ, maxQ, result):
 #D = [0, 1, 2, 3, 4, 5]
 #Q = [0, 3, 5, 6, 7, 8]
 
-D = [1, 2, 3, 4, 5]
-Q = [1, 4, 5]
+#D = [1, 2, 3, 4, 5]
+#Q = [1, 4, 5]
 
 #D = list(range(0,2000))
 #Q = [0, 100, 101, 234, 2001]
 
-#D = list(range(0,1000000))
-#Q = list(range(10,1000))
+D = list(range(0,1000000))
+Q = list(range(10,1000,2))
 
 result = []
 print("\nIntersect(D, Q, 0, %d, 0, %d, result)" %(len(D)-1, len(Q)-1))
