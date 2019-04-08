@@ -1,0 +1,11 @@
+﻿EXAMPLE
+
+
+First name: Bruno                                                        Last name: Martins
+Age: 27
+
+
+My name is Bruno!!
+
+
+This is an example for translation!

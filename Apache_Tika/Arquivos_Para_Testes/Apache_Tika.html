@@ -1,0 +1,532 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0024)https://tika.apache.org/ -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Apache Tika – Apache Tika</title>
+    <style type="text/css" media="all">
+      @import url("./css/site.css");
+    </style>
+    <link rel="icon" type="image/png" href="https://tika.apache.org/tikaNoText16.png">
+    <script type="text/javascript">
+      function selectProvider(form) {
+        provider = form.elements['searchProvider'].value;
+        if (provider == "any") {
+          if (Math.random() > 0.5) {
+            provider = "lucid";
+          } else {
+            provider = "sl";
+          }
+        }
+        if (provider == "lucid") {
+          form.action = "http://find.searchhub.org/p:tika";
+        } else if (provider == "sl") {
+          form.action = "http://search-lucene.com/tika";
+        }
+        days = 90;
+        date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toGMTString();
+        document.cookie = "searchProvider=" + provider + expires + "; path=/";
+      }
+      function initProvider() {
+        if (document.cookie.length>0) {
+          cStart=document.cookie.indexOf("searchProvider=");
+          if (cStart!=-1) {
+            cStart=cStart + "searchProvider=".length;
+            cEnd=document.cookie.indexOf(";", cStart);
+            if (cEnd==-1) {
+              cEnd=document.cookie.length;
+            }
+            provider = unescape(document.cookie.substring(cStart,cEnd));
+            document.forms['searchform'].elements['searchProvider'].value = provider;
+          }
+        }
+        document.forms['searchform'].elements['q'].focus();
+      }
+    </script>
+  <script src="chrome-extension://mooikfkahbdckldjjndioackbalphokd/assets/prompt.js"></script></head>
+  <body onload="initProvider();" class="vsc-initialized" cz-shortcut-listen="true">
+    <div id="body">
+      <div id="banner">
+        <a href="http://tika.apache.org/" id="bannerLeft" title="Apache Tika"><img src="./Apache Tika – Apache Tika_files/tika.png" alt="Apache Tika" width="292" height="100"></a>
+        <a href="http://www.apache.org/" id="bannerRight" title="The Apache Software Foundation"><img src="./Apache Tika – Apache Tika_files/asf-logo.gif" alt="The Apache Software Foundation" width="387" height="100"></a>
+      </div>
+      <div id="content">
+        <!-- Licensed to the Apache Software Foundation (ASF) under one or more --><!-- contributor license agreements.  See the NOTICE file distributed with --><!-- this work for additional information regarding copyright ownership. --><!-- The ASF licenses this file to You under the Apache License, Version 2.0 --><!-- (the "License"); you may not use this file except in compliance with --><!-- the License.  You may obtain a copy of the License at --><!--  --><!-- http://www.apache.org/licenses/LICENSE-2.0 --><!--  --><!-- Unless required by applicable law or agreed to in writing, software --><!-- distributed under the License is distributed on an "AS IS" BASIS, --><!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. --><!-- See the License for the specific language governing permissions and --><!-- limitations under the License. --><div class="section">
+<h2><a name="Apache_Tika_-_a_content_analysis_toolkit"></a>Apache Tika - a content analysis toolkit</h2>
+<p>The Apache Tika™ toolkit detects and extracts metadata and text from over a thousand different file types (such as PPT, XLS, and PDF). All of these file types can be parsed through a single interface, making Tika useful for search engine indexing, content analysis, translation, and much more. You can find the latest release on the <a href="https://tika.apache.org/download.html">download page</a>. Please see the <a href="https://tika.apache.org/1.20/gettingstarted.html">Getting Started</a> page for more information on how to start using Tika.</p>
+<p>The <a href="https://tika.apache.org/1.20/parser.html">Parser</a> and <a href="https://tika.apache.org/1.20/detection.html">Detector</a> pages describe the main interfaces of Tika and how they work.</p>
+<p>If you're interested in contributing to Tika, please see the <a href="https://tika.apache.org/contribute.html">Contributing</a> page or send an email to the <a href="https://tika.apache.org/mail-lists.html">Tika development list</a>.</p>
+<p>Tika is a project of the <a class="externalLink" href="http://www.apache.org/">Apache Software Foundation</a>, and was formerly a subproject of <a class="externalLink" href="http://lucene.apache.org/">Apache Lucene</a>. </p></div>
+<div class="section">
+<h2><a name="Latest_News"></a>Latest News</h2>
+<dl>
+<dt>22 December 2018: Apache Tika Release</dt>
+<dd> Apache Tika 1.20 has been released! This release includes one critical bug fix: prevent tika-server from responding with a 503 after hitting an OutOfMemory Error (TIKA-2776). Please see the <a class="externalLink" href="https://dist.apache.org/repos/dist/release/tika/CHANGES-1.20.txt">CHANGES.txt</a> file for the full list of changes in the release and have a look at the download page for more information on how to obtain Apache Tika 1.20.</dd>
+<dt>9 October 2018: Apache Tika Release</dt>
+<dd> Apache Tika 1.19.1 has been released! This release includes two critical bug fixes: a) fixing the MP3Parser (TIKA-2730) and b) limiting entity expansions in SAX parsing (TIKA-2727). Please see the <a class="externalLink" href="https://dist.apache.org/repos/dist/release/tika/CHANGES-1.19.1.txt">CHANGES.txt</a> file for the full list of changes in the release and have a look at the download page for more information on how to obtain Apache Tika 1.19.1.</dd>
+<dt>18 September 2018: Apache Tika Release</dt>
+<dd> Apache Tika 1.19 has been released! This release requires Java 8. This release includes bug fixes, improved mime detection, security fixes and upgrades to dependencies. Please see the <a class="externalLink" href="https://dist.apache.org/repos/dist/release/tika/CHANGES-1.19.txt">CHANGES.txt</a> file for the full list of changes in the release and have a look at the download page for more information on how to obtain Apache Tika 1.19.</dd>
+<dt>24 April 2018: Apache Tika Release</dt>
+<dd> Apache Tika 1.18 has been released! This release includes bug fixes (e.g. extraction from grouped shapes in PPT), security fixes and upgrades to dependencies. <b>PLEASE NOTE:</b> The next versions will require Java 8. Please see the <a class="externalLink" href="https://dist.apache.org/repos/dist/release/tika/CHANGES-1.18.txt">CHANGES.txt</a> file for the full list of changes in the release and have a look at the download page for more information on how to obtain Apache Tika 1.18.</dd>
+<dt>13 December 2017: Apache Tika Release</dt>
+<dd> Apache Tika 1.17 has been released! This release includes new support for automatic image captioning, as well as numerous bug fixes and upgrades to dependencies. <b>PLEASE NOTE:</b> this will be the last version that will support Java 7. The next versions will require Java 8. Please see the <a class="externalLink" href="https://dist.apache.org/repos/dist/release/tika/CHANGES-1.17.txt">CHANGES.txt</a> file for the full list of changes in the release and have a look at the download page for more information on how to obtain Apache Tika 1.17.</dd>
+<dt>12 July 2017: Apache Tika Release</dt>
+<dd> Apache Tika 1.16 has been released! This release includes integration with USCDataScience's Age Predictor, more warnings for missing optional dependencies, extraction of text from charts and diagrams in ooxml files, and numerous improvements to mime detection. This release removes two dependencies that may have been incompatible with ASL 2.0 -- org.json and jj2000. Please see the <a class="externalLink" href="https://dist.apache.org/repos/dist/release/tika/CHANGES-1.16.txt">CHANGES.txt</a> file for the full list of changes in the release and have a look at the download page for more information on how to obtain Apache Tika 1.16.</dd>
+<dt>30 May 2017: Apache Tika Release</dt>
+<dd> Apache Tika 1.15 has been released! This release includes integration with Google's Tensorflow Object Recognition via the OpenCV API, a new 'tika-eval' module, configurable encoding detectors and several new parsers. Please see the <a class="externalLink" href="https://dist.apache.org/repos/dist/release/tika/CHANGES-1.15.txt">CHANGES.txt</a> file for a full list of changes in this release and have a look at the download page for more information on how to obtain Apache Tika 1.15.</dd>
+<dt>19 Oct 2016: Apache Tika Release</dt>
+<dd> Apache Tika 1.14 has been released! This release includes integration with Google's Tensorflow Image Recognition via the Inception API, improvements to PDF parsing using OCR, message parsing and MIME detection. Please see the <a class="externalLink" href="https://dist.apache.org/repos/dist/release/tika/CHANGES-1.14.txt">CHANGES.txt</a> file for a full list of changes in this release and have a look at the downlpage page for more information on how to obtain Apache Tika 1.14.</dd>
+<dt>16 May 2016: Apache Tika Release</dt>
+<dd> Apache Tika 1.13 has been released! This release includes some significant changes to the PDF support, including PDFBox 2.0.1, two new NER system support (MIT-NLP Information Extraction and GROBID Quantities), a new tika-langdetect module, and much more. Please see the <a class="externalLink" href="https://dist.apache.org/repos/dist/release/tika/CHANGES-1.13.txt">CHANGES.txt</a> file for a full list of changes in this release and have a look at the download page for more information on how to obtain Apache Tika 1.13.</dd>
+<dt>6 April 2016: Apache Tika key technology in exposing Panama Papers</dt>
+<dd> As documented on the <a class="externalLink" href="https://t.co/0ZA9ZLaP5x">Forbes article</a>, Apache Tika and Apache Solr were the two linchpin technologies used in the wide exposure of analyzing the Panama papers data files that tracks government corruption and offshore accounts - a global news story. </dd>
+<dt>19 February 2016: Apache Tika Release</dt>
+<dd> Apache Tika 1.12 has been released! This release includes some improvements to Named Entity Recognition (Stanford NER integration and Apache OpenNLP) and additionally efficiency improvements to the GeoTopicParser. There are also bugfixes to Tika REST server in this release. Please see the <a class="externalLink" href="https://dist.apache.org/repos/dist/release/tika/CHANGES-1.12.txt">CHANGES.txt</a> file for a full list of changes in this release and have a look at the download page for more information on how to obtain Apache Tika 1.12.</dd>
+<dt>25 October 2015: Apache Tika Release</dt>
+<dd> Apache Tika 1.11 has been released! This release includes several improvements that better utilize Java7 support, that help extract more content using the cTAKES clinical extraction system and GROBID journal parser, and improvements to Tesseract extraction. Please see the <a class="externalLink" href="https://dist.apache.org/repos/dist/release/tika/CHANGES-1.11.txt">CHANGES.txt</a> file for a full list of changes in this release and have a look at the download page for more information on how to obtain Apache Tika 1.11.</dd>
+<dt>01 August 2015: Apache Tika Release</dt>
+<dd> Apache Tika 1.10 has been released! This release includes several improvements including the ability to parse MS Access Files, composite parser creation via Tika Config XML, and many more! Please see the <a class="externalLink" href="https://dist.apache.org/repos/dist/release/tika/CHANGES-1.10.txt">CHANGES.txt</a> file for a full list of changes in this release and have a look at the download page for more information on how to obtain Apache Tika 1.10.</dd>
+<dt>23 June 2015: Apache Tika Release</dt>
+<dd> Apache Tika 1.9 has been released. This includes several improvements including parsers that extract additional content e.g., from images using EXIF and FFMPEG, along with improvements to MIME detection using probabilistic means, and updates to the Tika REST server supporting translation and language detection. Please see the <a class="externalLink" href="https://dist.apache.org/repos/dist/release/tika/CHANGES-1.9.txt">CHANGES.txt</a> file for a full list of changes in this release. Have a look at the download page for more information on how to obtain Apache Tika 1.9.</dd>
+<dt>20 April 2015: Apache Tika Release</dt>
+<dd> Apache Tika 1.8 has been released! This release includes several bug fixes, tika-batch (a batch processing system for processing large sets of files), and more! Please see the <a class="externalLink" href="https://dist.apache.org/repos/dist/release/tika/CHANGES-1.8.txt">CHANGES.txt</a> file for a full list of changes in this release and have a look at the download page for more information on how to obtain Apache Tika 1.8.</dd>
+<dt>15 January 2015: Apache Tika Release</dt>
+<dd> Apache Tika 1.7 has been released! This release includes bug fixes and new features including a new Tesseract OCR Parser; a new GDAL Parser; more supported formats, and overall improvements in Tika stability. Please see the <a class="externalLink" href="https://dist.apache.org/repos/dist/release/tika/CHANGES-1.7.txt">CHANGES.txt</a> file for a full list of changes in this release and have a look at the download page for more information on how to obtain Apache Tika 1.7.</dd>
+<dt>5 September 2014: Apache Tika Release</dt>
+<dd> Apache Tika 1.6 has been released! This release includes bug fixes and new features including a new Translation API; more supported formats, and overall improvements in Tika stability. Please see the <a class="externalLink" href="https://dist.apache.org/repos/dist/release/tika/CHANGES-1.6.txt">CHANGES.txt</a> file for a full list of changes in this release and have a look at the download page for more information on how to obtain Apache Tika 1.6.</dd>
+<dt>7-9 April 2014: Tika at ApacheCon NA in Denver</dt>
+<dd> ApacheCon NA is in Denver for 2014, and this time we've <a class="externalLink" href="http://apacheconnorthamerica2014.sched.org/?s=tika">5 Tika related talks</a> on the schedule! Do come along to learn more about how Tika works, and how it has been used. See the <a class="externalLink" href="http://events.linuxfoundation.org/events/apachecon-north-america/">ApacheCon site</a> for more information and how to attend.</dd>
+<dt>19 Feb 2014: Apache Tika Release</dt>
+<dd> Apache Tika 1.5 has been released! This release includes several important bugfixes and new features. Please see the <a class="externalLink" href="http://www.apache.org/dist/tika/CHANGES-1.5.txt">CHANGES.txt</a> file for a full list of changes in this release, and have a look at the download page for more information on how to obtain Apache Tika 1.5.</dd>
+<dt>1 September 2013: Community News - NSF Proposal Win</dt>
+<dd> Chris Mattmann, Apache Tika PMC member and Adjunct Assistant Professor at the University of Southern California, has won a National Science Foundation proposal for a project to deliver an open source framework for metadata exploration, automatic text mining and information retrieval of polar data using Apache Tika. You can read more <a class="externalLink" href="http://www.nsf.gov/awardsearch/showAward?AWD_ID=1348450&amp;HistoricalAwards=false">here</a>. 
+<p>Congratulations to Chris and the team at USC!</p></dd>
+<dt>3 July 2013: Apache Tika Release</dt>
+<dd> Apache Tika 1.4 has been released! This release includes several important bugfixes and new features. Please see the <a class="externalLink" href="http://www.apache.org/dist/tika/CHANGES-1.4.txt">CHANGES.txt</a> file for a full list of changes in this release, and have a look at the download page for more information on how to obtain Apache Tika 1.4.</dd>
+<dt>22 January 2013: Apache Tika Release</dt>
+<dd> Apache Tika 1.3 has been released! This release includes several important bugfixes and new features. Please see the <a class="externalLink" href="http://www.apache.org/dist/tika/CHANGES-1.3.txt">CHANGES.txt</a> file for a full list of changes in this release, and have a look at the download page for more information on how to obtain Apache Tika 1.3. </dd>
+<dt>17 July 2012: Apache Tika Release</dt>
+<dd> Apache Tika 1.2 has been released! This is the first appearance of a few new core sub-modules, including the Tika JAX-RS Network Server, as well as new support for handling XMP metadata. Of course, new file formats have been added and improvements have been made to parsing and detection of existing formats. Please see the <a class="externalLink" href="http://www.apache.org/dist/tika/CHANGES-1.2.txt">CHANGES.txt</a> file for a full list of changes in this release, and have a look at the download page for more information on how to obtain Apache Tika 1.2.</dd>
+<dt>23 March 2012: Apache Tika Release</dt>
+<dd> Apache Tika 1.1 is out the door! We've made a number of improvements to PDF, RTF and MP3 parsing. We've also provided some new features on the command line including the ability to list detectors. Other bug fixes and improvements are listed in the <a class="externalLink" href="http://www.apache.org/dist/tika/CHANGES-1.1.txt">CHANGES.txt</a> file for this release. Have a look at the download page for more information on the release.</dd>
+<dt>7 November 2011: Apache Tika Release</dt>
+<dd> Apache Tika 1.0 has been released, just in time for ApacheCon NA 2011! The 1.0 release of Tika removes all deprecated pre 1.0 API methods, makes several OSGi and Configuration improvements, and improves parsing in RTF, Word and PDF files. Tika no longer ships a retro-translated JDK 1.4 version of the library, so it's time to get on JDK 1.5 or higher to use Tika, so be on the look out. Have a look at the download page for more details. </dd>
+<dt>7-11 November 2011 - Tika at US ApacheCon</dt>
+<dd> ApacheCon NA is coming to Vancouver, British Columbia, at the Westin Bayshore, and Chris Mattmann will be giving a <a class="externalLink" href="http://na11.apachecon.com/talks/19391">talk</a> on the forthcoming 1.0 release of Tika as part of the <a class="externalLink" href="http://na11.apachecon.com/talk/by_track/1400">Content Technologies track</a> on Thursday November 10th, 2011. The talk will cover the history of Tika, its genesis, its inception as a top-level project, and where it's headed 1.0 and beyond. Come out and support Tika by attending the talk! </dd>
+<dt>30 September 2011: Apache Tika Release</dt>
+<dd> Apache Tika 0.10 has been released. This release includes new parser support for CHM files, bugfixes to RTF parsing, an improved GUI and more. Please see the download page for more details. </dd>
+<dt>16 February 2011: Apache Tika Release</dt>
+<dd> Apache Tika 0.9 has been released. This release includes several important bugfixes and new features. Please see the download page for more details. </dd>
+<dt>12 November 2010: Apache Tika Release</dt>
+<dd> Apache Tika 0.8 has been released. Please see the download page for more details. This is our first release as a TLP. We're excited!</dd>
+<dt>1-5 November 2010 - Tika at US ApacheCon</dt>
+<dd> ApacheCon NA is coming to Atlanta, Georgia, at the Westin Peachtree, and Tika is being repped as part of the <a class="externalLink" href="http://us.apachecon.com/c/acna2010/schedule/2010/11/05">Lucene and friends track</a> on Friday, November 5th, 2010. Chris Mattmann will give a talk on how Tika is being used at NASA and in the context of other projects in the Apache ecosystem.
+<p>Friday, Nov. 5th, 2010:</p>
+<ul>
+<li><a class="externalLink" href="http://us.apachecon.com/c/acna2010/sessions/538">Scientific data curation and processing with Apache Tika</a> - Chris Mattmann @ 9:00am</li></ul></dd>
+<dt>April 2010: Tika Graduates to TLP</dt>
+<dd> Apache Tika was voted into TLP status by a resolution submitted to the Apache Board. We are in the process of updating the site and moving things around. If you notice anything out of place, let us know.</dd>
+<dt>April 2010: Apache Tika Release</dt>
+<dd> Apache Tika 0.7 has been released. Please see the download page for more details.</dd>
+<dt>January 2010: Apache Tika Release</dt>
+<dd> Apache Tika 0.6 has been released. Please see the download page for more details.</dd>
+<dt>November 2009: Apache Tika Release</dt>
+<dd> Apache Tika 0.5 has been released. Please see the download page for more details.</dd>
+<dt>14 August 2009 - Lucene at US ApacheCon</dt>
+<dd> ApacheCon US is once again in the Bay Area and Lucene is coming along for the ride! The Lucene community has planned two full days of talks, plus a meetup and the usual bevy of training. With a well-balanced mix of first time and veteran ApacheCon speakers, the <a class="externalLink" href="http://www.us.apachecon.com/c/acus2009/schedule#lucene">Lucene track</a> at ApacheCon US promises to have something for everyone. Be sure not to miss:
+<p>Training:</p>
+<ul>
+<li><a class="externalLink" href="http://www.us.apachecon.com/c/acus2009/sessions/437">Lucene Boot Camp</a> - A two day training session, Nov. 2nd &amp; 3rd</li>
+<li><a class="externalLink" href="http://www.us.apachecon.com/c/acus2009/sessions/375">Solr Day</a> - A one day training session, Nov. 2nd</li></ul>
+<p>Thursday, Nov. 5th:</p>
+<ul>
+<li><a class="externalLink" href="http://www.us.apachecon.com/c/acus2009/sessions/428">Introduction to the Lucene Ecosystem</a> - Grant Ingersoll @ 9:00</li>
+<li><a class="externalLink" href="http://www.us.apachecon.com/c/acus2009/sessions/461">Lucene Basics and New Features</a> - Michael Busch @ 10:00</li>
+<li><a class="externalLink" href="http://www.us.apachecon.com/c/acus2009/sessions/331">Apache Solr: Out of the Box</a> - Chris Hostetter @ 14:00</li>
+<li><a class="externalLink" href="http://www.us.apachecon.com/c/acus2009/sessions/427">Introduction to Nutch</a> - Andrzej Bialecki @ 15:00</li>
+<li><a class="externalLink" href="http://www.us.apachecon.com/c/acus2009/sessions/430">Lucene and Solr Performance Tuning</a> - Mark Miller @ 16:30</li></ul>
+<p>Friday, Nov. 6th:</p>
+<ul>
+<li><a class="externalLink" href="http://www.us.apachecon.com/c/acus2009/sessions/332">Implementing an Information Retrieval Framework for an Organizational Repository</a> - Sithu D Sudarsan @ 9:00</li>
+<li><a class="externalLink" href="http://www.us.apachecon.com/c/acus2009/sessions/333">Apache Mahout - Going from raw data to Information</a> - Isabel Drost @ 10:00</li>
+<li><a class="externalLink" href="http://www.us.apachecon.com/c/acus2009/sessions/334">MIME Magic with Apache Tika</a> - Jukka Zitting @ 11:30</li>
+<li><a class="externalLink" href="http://www.us.apachecon.com/c/acus2009/sessions/335">Building Intelligent Search Applications with the Lucene Ecosystem</a> - Ted Dunning @ 14:00</li>
+<li><a class="externalLink" href="http://www.us.apachecon.com/c/acus2009/sessions/462">Realtime Search</a> - Jason Rutherglen @ 15:00</li></ul></dd>
+<dt>July 2009: Apache Tika Release</dt>
+<dd> Apache Tika 0.4 has been released. Please see the download page for more details.</dd>
+<dt>March 2009: Apache Tika Release</dt>
+<dd> Apache Tika 0.3 has been released. Please see the download page for more details.</dd>
+<dt>February 2009: Lucene at ApacheCon Europe 2009 in Amsterdam</dt>
+<dd> Lucene will be extremely well represented at <a class="externalLink" href="http://www.eu.apachecon.com/c/aceu2009/">ApacheCon EU 2009</a> in Amsterdam, Netherlands this March 23-27, 2009:
+<ul>
+<li><a class="externalLink" href="http://eu.apachecon.com/c/aceu2009/sessions/197">Lucene Boot Camp</a> - A two day training session, March 23 &amp; 24th</li>
+<li><a class="externalLink" href="http://eu.apachecon.com/c/aceu2009/sessions/201">Solr Boot Camp</a> - A one day training session, March 24th</li>
+<li><a class="externalLink" href="http://eu.apachecon.com/c/aceu2009/sessions/136">Introducing Apache Mahout</a> - Grant Ingersoll. March 25th @ 10:30</li>
+<li><a class="externalLink" href="http://eu.apachecon.com/c/aceu2009/sessions/137">Lucene/Solr Case Studies</a> - Erik Hatcher. March 25th @ 11:30</li>
+<li><a class="externalLink" href="http://eu.apachecon.com/c/aceu2009/sessions/138">Advanced Indexing Techniques with Apache Lucene</a> - Michael Busch. March 25th @ 14:00</li>
+<li><a class="externalLink" href="http://eu.apachecon.com/c/aceu2009/sessions/251">Apache Solr - A Case Study</a> - Uri Boness. March 26th @ 17:30</li>
+<li><a class="externalLink" href="http://eu.apachecon.com/c/aceu2009/sessions/250">Best of breed - httpd, forrest, solr and droids</a> - Thorsten Scherler. March 27th @ 17:30</li>
+<li><a class="externalLink" href="http://eu.apachecon.com/c/aceu2009/sessions/165">Apache Droids - an intelligent standalone robot framework</a> - Thorsten Scherler. March 26th @ 15:00</li></ul></dd>
+<dt>December 2008: Apache Tika Release</dt>
+<dd> Apache Tika 0.2 has been released. Please see the download page for more details.</dd>
+<dt>November 2008: User mailing list created</dt>
+<dd> A new mailing list, tika-user@lucene.apache.org, has been created for discussion about the use of the Tika toolkit. You can subscribe this mailing list by sending a message to tika-user-subscribe@lucene.apache.org.</dd>
+<dt>October 2008: Tika graduates to a Lucene subproject</dt>
+<dd> Tika has graduated form the Incubator to become a subproject of Apache Lucene. The project infrastructure will be migrated from incubator.apache.org to lucene.apache.org.</dd>
+<dt>October 2008: Apache Tika status report</dt>
+<dd> Dave Meikle was just voted in as a new committer.
+<p>Paolo Mottadelli will present Tika at ApacheCon US.</p>
+<p>Tika 0.2 should be released soon.</p>
+<p>Usage documentation has been added to the website.</p></dd>
+<dt>July 2008: Apache Tika status report</dt>
+<dd> Tika community remains relatively small, with just a handful of active members
+<p>Work towards Tika 0.2 continues, Chris Mattman has volunteered to be the release manager</p></dd>
+<dt>April 2008: Apache Tika status report</dt>
+<dd> Niall Pemberton joined the project as a committer and PPMC member
+<p>The number of issues reported by external contributors is growing gradually.</p>
+<p>There was a Fast Feather Talk on Tika in ApacheCon EU 2008</p>
+<p>We have good contacts especially with Apache POI and PDFBox</p>
+<p>We are working towards Tika 0.2</p>
+<p>Metadata handling improvements are being discussed</p></dd>
+<dt>January 2008: Apache Tika status report</dt>
+<dd> No new committers since the last report, activity has been moderate but steady, leading to the 0.1 release.
+<p>Tika 0.1 (incubating) has just been released.</p>
+<p>Chris Mattmann intends to use that release in Nutch, That's good progress towards Tika's goal of providing data extraction functionality to other projects.</p>
+<p>A new Tika logo was created by Google Highly Open Participation student, hasn't been integrated yet.</p></dd>
+<dt>December 27th, 2007: Tika 0.1-incubating Released!</dt>
+<dd> Tika has made its first official release, titled 0.1-incubating. See the <a class="externalLink" href="http://www.apache.org/dist/incubator/tika/CHANGES-0.1-incubating.txt">CHANGES.txt</a> file for more information on the list of updates in this initial release. Thanks to all who contributed! You can download the official source tarball <a class="externalLink" href="http://www.apache.org/dyn/closer.cgi/incubator/tika">here</a>.</dd>
+<dt>October 8th, 2007: Welcome Keith Bennett!</dt>
+<dd> The Tika PPMC has <a class="externalLink" href="http://www.nabble.com/Please-welcome-Keith-Bennett-as-a-Tika-committer%21-tf4586151.html#a13107428">elected</a> Keith Bennett as our new committer. Welcome!</dd>
+<dt>March 22nd, 2007: Apache Tika project started</dt>
+<dd> The Apache Tika project was formally started when the <a class="externalLink" href="http://wiki.apache.org/incubator/TikaProposal">Tika proposal</a> was <a class="externalLink" href="http://mail-archives.apache.org/mod_mbox/incubator-general/200703.mbox/%3c510143ac0703221130p4341aa78vd6608c13ffc95a82@mail.gmail.com%3e">accepted</a> by the <a class="externalLink" href="http://incubator.apache.org/">Apache Incubator PMC</a>. </dd></dl></div>
+      </div>
+      <div id="sidebar">
+        <div id="navigation">
+                    <h5>Apache Tika</h5>
+            <ul>
+              
+    <li class="none">
+              <strong>Introduction</strong>
+        </li>
+              
+    <li class="none">
+                    <a href="https://tika.apache.org/download.html">Download</a>
+          </li>
+              
+    <li class="none">
+                    <a href="https://tika.apache.org/contribute.html">Contribute</a>
+          </li>
+              
+    <li class="none">
+                    <a href="https://tika.apache.org/mail-lists.html">Mailing Lists</a>
+          </li>
+              
+    <li class="none">
+                    <a href="http://wiki.apache.org/tika/" class="externalLink">Tika Wiki</a>
+          </li>
+              
+    <li class="none">
+                    <a href="https://issues.apache.org/jira/browse/TIKA" class="externalLink">Issue Tracker</a>
+          </li>
+              
+    <li class="none">
+                    <a href="https://tika.apache.org/security.html">Security</a>
+          </li>
+          </ul>
+              <h5>Documentation</h5>
+            <ul>
+              
+          
+                    
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+              
+        <li class="expanded">
+                    <a href="https://tika.apache.org/1.20/index.html">Apache Tika 1.20</a>
+                  <ul>
+                  
+    <li class="none">
+                    <a href="https://tika.apache.org/1.20/gettingstarted.html">Getting Started</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="https://tika.apache.org/1.20/formats.html">Supported Formats</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="https://tika.apache.org/1.20/parser.html">Parser API</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="https://tika.apache.org/1.20/parser_guide.html">Parser 5min Quick Start Guide</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="https://tika.apache.org/1.20/detection.html">Content and Language Detection</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="https://tika.apache.org/1.20/configuring.html">Configuring Tika</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="https://tika.apache.org/1.20/examples.html">Usage Examples</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="https://tika.apache.org/1.20/api/">API Documentation</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="https://tika.apache.org/1.20/miredot/">REST API Documentation (Miredot)</a>
+          </li>
+              </ul>
+        </li>
+              
+                
+                    
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+              
+        <li class="collapsed">
+                    <a href="https://tika.apache.org/1.19.1/index.html">Apache Tika 1.19.1</a>
+                </li>
+              
+                
+                    
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+              
+        <li class="collapsed">
+                    <a href="https://tika.apache.org/1.19/index.html">Apache Tika 1.19</a>
+                </li>
+              
+                
+                    
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+              
+        <li class="collapsed">
+                    <a href="https://tika.apache.org/1.18/index.html">Apache Tika 1.18</a>
+                </li>
+              
+                
+                    
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+              
+        <li class="collapsed">
+                    <a href="https://tika.apache.org/1.17/index.html">Apache Tika 1.17</a>
+                </li>
+              
+                
+                    
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+              
+        <li class="collapsed">
+                    <a href="https://tika.apache.org/1.16/index.html">Apache Tika 1.16</a>
+                </li>
+              
+                
+                    
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+              
+        <li class="collapsed">
+                    <a href="https://tika.apache.org/1.15/index.html">Apache Tika 1.15</a>
+                </li>
+              
+                
+                    
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+              
+        <li class="collapsed">
+                    <a href="https://tika.apache.org/1.14/index.html">Apache Tika 1.14</a>
+                </li>
+              
+                
+                    
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+              
+        <li class="collapsed">
+                    <a href="https://tika.apache.org/1.13/index.html">Apache Tika 1.13</a>
+                </li>
+              
+                
+                    
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+              
+        <li class="collapsed">
+                    <a href="https://tika.apache.org/1.12/index.html">Apache Tika 1.12</a>
+                </li>
+              
+                
+                    
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+              
+        <li class="collapsed">
+                    <a href="https://tika.apache.org/1.11/index.html">Apache Tika 1.11</a>
+                </li>
+              
+                
+                    
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+              
+        <li class="collapsed">
+                    <a href="https://tika.apache.org/1.10/index.html">Apache Tika 1.10</a>
+                </li>
+          </ul>
+              <h5>The Apache Software Foundation</h5>
+            <ul>
+              
+    <li class="none">
+                    <a href="http://www.apache.org/foundation/" class="externalLink">About</a>
+          </li>
+              
+    <li class="none">
+                    <a href="http://www.apache.org/licenses/" class="externalLink">License</a>
+          </li>
+              
+    <li class="none">
+                    <a href="http://www.apache.org/security/" class="externalLink">Security</a>
+          </li>
+              
+    <li class="none">
+                    <a href="http://www.apache.org/foundation/sponsorship.html" class="externalLink">Sponsorship</a>
+          </li>
+              
+    <li class="none">
+                    <a href="http://www.apache.org/foundation/thanks.html" class="externalLink">Thanks</a>
+          </li>
+          </ul>
+      
+          <div id="search">
+            <h5>Search with Apache Solr</h5>
+            <form action="http://search.lucidimagination.com/p:tika" method="get" id="searchform">
+              <input type="text" id="query" name="q">
+              <select name="searchProvider" id="searchProvider">
+                <option value="any">provider</option>
+                <option value="lucid">Lucid Find</option>
+                <option value="sl">Search-Lucene</option>
+              </select>
+              <input type="submit" id="submit" value="Search" name="Search" onclick="selectProvider(this.form)">
+            </form>
+          </div>
+
+          <div id="bookpromo">
+            <h5>Books about Tika</h5>
+            <p>
+              <a href="http://manning.com/mattmann/" title="Tika in Action"><img src="./Apache Tika – Apache Tika_files/mattmann_cover150.jpg" width="150" height="186"></a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div id="footer">
+        <p>
+          Copyright © 2018
+          <a href="http://www.apache.org/">The Apache Software Foundation</a>.
+          Site powered by <a href="http://maven.apache.org/">Apache Maven</a>. 
+          Search powered by
+          <a href="http://www.lucidimagination.com/">Lucid Imagination</a>
+          and <a href="http://sematext.com/">Sematext</a>.
+          <br>
+          Apache Tika, Tika, Apache, the Apache feather logo, and the Apache
+          Tika project logo are trademarks of The Apache Software Foundation.
+        </p>
+      </div>
+    </div>
+  
+
+<style>.Usm8oMZD0xWG { color:#222222 !important; } 
+.Usm8oMZD0xWG.ba-outline { outline-color:#222222 } 
+.Usm8oMZD0xWG.GEFf2kpXRWQxR:hover, .Usm8oMZD0xWG.GEFf2kpXRWQxR.active { color:#343434 !important; }
+.dovXvXBUIuVck6HEjnE { background-color:#222222 !important; }
+.dovXvXBUIuVck6HEjnE.GEFf2kpXRWQxR:hover, .dovXvXBUIuVck6HEjnE.GEFf2kpXRWQxR.active { background:#343434 !important; }
+.ba-border-primary { border-color:#343434 !important }
+.kwhEOq1TIv8NM { background:#2c7c14 !important; color:white !important; }
+.kwhEOq1TIv8NM.GEFf2kpXRWQxR:hover, .kwhEOq1TIv8NM.GEFf2kpXRWQxR.active { background:#236210 !important; }
+.ba-color-secondary { color:#2c7c14 !important;  }
+.ba-color-secondary.GEFf2kpXRWQxR:hover, .ba-color-secondary.GEFf2kpXRWQxR.active { color:#236210 !important; }
+.ba-color-tertiary { color:#2c7c14 !important }
+.ba-color-tertiary.GEFf2kpXRWQxR:hover, .ba-color-tertiary.GEFf2kpXRWQxR.active { color:#236210 !important }
+.CaSiCzJ88lywl { background:#2c7c14 !important }
+.ba-bg-tertiary.GEFf2kpXRWQxR:hover, .ba-bg-tertiary.GEFf2kpXRWQxR.active { background:#236210 !important }</style></body></html>
