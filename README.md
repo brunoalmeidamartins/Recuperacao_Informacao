@@ -1,4 +1,4 @@
-# Recuperacao_Informacao
+# Recuperação da Informação
 UFJF Disciplina de Recuperação da Informação
 
 
